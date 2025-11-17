@@ -1,16 +1,58 @@
-# React + Vite
+# 🛒 Add to Cart App using React Router
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple e-commerce Add-to-Cart application built using **ReactJS** and **React Router**, with data fetched from the **Fake Store API**.  
+The app includes full cart functionality such as Add, Remove, Quantity Control, and Price Calculation with Discount.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Tech Stack
 
-## React Compiler
+- **ReactJS**
+- **React Router DOM**
+- **Tailwind CSS**
+- **JavaScript**
+- **Fake Store API**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📌 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### ✔ Product Page
+
+- Fetches product list from Fake Store API
+- Displays product image, title, price, and description
+- Responsive product grid
+- "Add to Cart" + "Remove from Cart" buttons (dynamic)
+
+### ✔ Cart Page
+
+- Shows items added to cart
+- Increase/Decrease quantity
+- Remove individual items
+- Item-level total = price × quantity
+- Total cart price
+- 10% discount applied
+- Final price calculation
+
+### ✔ Global Cart State
+
+Implemented using **React Context API**.
+
+---
+
+## 📂 Folder Structure
+
+src/
+context/
+CartContext.jsx
+pages/
+ProductsPage.jsx
+CartPage.jsx
+App.jsx
+main.jsx
+index.css
+
+## 🔗 API Used
+
+Fake Store API  
+https://fakestoreapi.com/products

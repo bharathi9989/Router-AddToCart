@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 export const cartContext = createContext();
 
-export function CartProvider({ childer }) {
+export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
   //  Add product to cart
@@ -11,13 +11,13 @@ export function CartProvider({ childer }) {
     const existingProduct = cart.find((item) => item.id === product.id);
 
     if (!existingProduct) {
-      setCart([...cart], { ...product, quantity: 1 });
+      setCart([...cart, { ...product, quantity: 1 }]);
     }
   };
 
   // Remove product from cart
 
-  const removeFromCart = (product) => {
+  const removeFromCart = (id) => {
     setCart(cart.filter((item) => item.id !== id));
   };
 
@@ -36,7 +36,7 @@ export function CartProvider({ childer }) {
     setCart(
       cart.map((item) =>
         item.id === id && item.quantity > 1
-          ? { ...cart, quantity: item.quantity - 1 }
+          ? { ...item, quantity: item.quantity - 1 }
           : item
       )
     );
@@ -65,7 +65,7 @@ export function CartProvider({ childer }) {
         finalPrice,
       }}
     >
-      {childer}
+      {children}
     </cartContext.Provider>
   );
 }

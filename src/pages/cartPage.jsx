@@ -6,8 +6,8 @@ function CartPage() {
     cart,
     increaseQty,
     decreaseQty,
-    addFromCart,
-    RemoveFromCart,
+    addToCart,
+    removeFromCart,
     totalPrice,
     finalPrice,
   } = useContext(cartContext);
@@ -54,10 +54,10 @@ function CartPage() {
               {/* Item Total */}
 
               <p className="font-semibold">
-                Total : ${(item.price * item.quantity).toFixed(2)}
+                Total : ₹{(item.price * item.quantity).toFixed(2)}
               </p>
               <button
-                onClick={() => RemoveFromCart(item.id)}
+                onClick={() => removeFromCart(item.id)}
                 className="mt-3 text-red-500 font-semibold"
               >
                 Remove
@@ -74,17 +74,17 @@ function CartPage() {
           <h1 className="text-xl font-bold mb-4">Price Details</h1>
           <div className="flex justify-between mb-2">
             <p>Total Price</p>
-            <p>${totalPrice.toFixed(2)}</p>
+            <p>₹{totalPrice.toFixed(2)}</p>
           </div>
 
           <div className="flex justify-between mb-2">
             <p>Discount 10%</p>
-            <p>${finalPrice.toFixed(2)}</p>
+            <p>₹{finalPrice.toFixed(2)}</p>
           </div>
           <hr className="my-2" />
           <div className="flex justify-between font-bold text-xl">
             <p>Final Price</p>
-            <p>${finalPrice.toFixed(2)}</p>
+            <p>₹{finalPrice.toFixed(2)}</p>
           </div>
         </div>
       )}

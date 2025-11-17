@@ -2,25 +2,60 @@ import React, { useContext, useEffect, useState } from "react";
 import { cartContext } from "../context/CartContext";
 
 function ProductsPage() {
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
   const [products, setProducts] = useState([]);
-  const { cart, addToCart, removeFromCard } = useContext(cartContext);
+  const { cart, addToCart, removeFromCart } = useContext(cartContext);
 
   // Fetch products from API
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
-      .then((res) => setProducts(data));
+      .then((res) => setProducts(res));
   }, []);
+
+  const filterProducts = products.filter((product) => {
+    const matchesSearch = product.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    const matchesCategory =
+      category === "all" ? true : product.category === category;
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
     <div className="p-6">
       <h1 className="text-3xl font-bold mb-6">Products</h1>
 
+      <div className="flex flex-col sm:flex-row gap-4 mb-6">
+        <input
+          type="text"
+          placeholder="Search products..."
+          className="border p-2 rounded w-full sm:w-1/2"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <select
+          className="border p-2 rounded w-full sm:w-1/3"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="all">All Categories</option>
+          <option value="men's clothing">Men's Clothing</option>
+          <option value="women's clothing">Women's Clothing</option>
+          <option value="jewelery">Jewelery</option>
+          <option value="electronics">Electronics</option>
+        </select>
+      </div>
+
       {/* Product List */}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product) => {
+        {filterProducts.map((product) => {
           const inCart = cart.find((item) => item.id === product.id);
 
           return (
@@ -38,13 +73,13 @@ function ProductsPage() {
               </h2>
 
               <p className="text-sm text-gray-600 line-clamp-2 mb-2">
-                {product.describtion}
+                {product.description}
               </p>
-              <p className="font-bold text-xl mb-3">{product.price} </p>
+              <p className="font-bold text-xl mb-3">₹{product.price} </p>
 
               {inCart ? (
                 <button
-                  onClick={() => removeFromCard(product.id)}
+                  onClick={() => removeFromCart(product.id)}
                   className="w-full bg-red-400 text-white py-2 rounded-lg"
                 >
                   Remove from cart
